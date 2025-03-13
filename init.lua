@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -911,12 +911,19 @@ require('lazy').setup({
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
-      }
+      } -- Sets colors to line numbers Above, Current and Below  in this order
+
+      function LineNumberColors()
+        vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#51B3EC', bold = true })
+        vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true })
+        vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#51B3EC', bold = true })
+      end
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+      LineNumberColors()
     end,
   },
 
