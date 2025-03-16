@@ -1,4 +1,8 @@
 -- Python virtual environment selector: https://github.com/linux-cultist/venv-selector.nvim/tree/regexp
+-- Install fd-find:
+-- apt install fd-find
+-- Link binary:
+-- ln -s $(which fdfind) ~/.local/bin/fd
 return {
   'linux-cultist/venv-selector.nvim',
   dependencies = {
