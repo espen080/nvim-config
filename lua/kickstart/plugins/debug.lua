@@ -20,6 +20,7 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+    'mfussenegger/nvim-dap-python',
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
@@ -34,7 +35,21 @@ return {
       desc = 'Debug: Start/Continue',
     },
     {
+      '<leader>bc',
+      function()
+        require('dap').continue()
+      end,
+      desc = 'Debug: Start/Continue',
+    },
+    {
       '<F1>',
+      function()
+        require('dap').step_into()
+      end,
+      desc = 'Debug: Step Into',
+    },
+    {
+      '<leader>bi',
       function()
         require('dap').step_into()
       end,
@@ -48,6 +63,13 @@ return {
       desc = 'Debug: Step Over',
     },
     {
+      '<leader>bo',
+      function()
+        require('dap').step_over()
+      end,
+      desc = 'Debug: Step Over',
+    },
+    {
       '<F3>',
       function()
         require('dap').step_out()
@@ -55,14 +77,28 @@ return {
       desc = 'Debug: Step Out',
     },
     {
-      '<leader>b',
+      '<leader>bu',
+      function()
+        require('dap').step_out()
+      end,
+      desc = 'Debug: Step Out',
+    },
+    {
+      '<leader>bb',
       function()
         require('dap').toggle_breakpoint()
       end,
       desc = 'Debug: Toggle Breakpoint',
     },
     {
-      '<leader>B',
+      '<leader>bt',
+      function()
+        require('dap').terminate()
+      end,
+      desc = 'Debug: Terminate',
+    },
+    {
+      '<leader>bB',
       function()
         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
       end,
@@ -71,6 +107,13 @@ return {
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     {
       '<F7>',
+      function()
+        require('dapui').toggle()
+      end,
+      desc = 'Debug: See last session result.',
+    },
+    {
+      '<leader>bv',
       function()
         require('dapui').toggle()
       end,
@@ -135,6 +178,10 @@ return {
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+    -- Install python spesific config
+
+    require('dap-python').setup '~/.virtualenvs/debugpy/bin/python'
 
     -- Install golang specific config
     require('dap-go').setup {
