@@ -9,6 +9,9 @@ return {
         transparency = true,
       },
       highlight_groups = {
+        MiniStatuslineFilename = { bg = 'none' },
+        MiniStatuslineDevInfo = { bg = 'none' },
+        CursorLine = { bg = 'none' },
         TelescopeBorder = { fg = 'highlight_high', bg = 'none' },
         TelescopeNormal = { bg = 'none' },
         TelescopePromptNormal = { bg = 'none' },
