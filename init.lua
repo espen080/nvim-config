@@ -112,7 +112,7 @@ vim.opt.mouse = ''
 vim.opt.showmode = false
 
 -- Show cloumn indicator at 80 characters
-vim.opt.colorcolumn = '80'
+vim.opt.colorcolumn = '80,120'
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
