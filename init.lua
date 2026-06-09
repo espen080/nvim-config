@@ -1021,3 +1021,7 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+vim.opt.tabstop = 4 -- Visual width of a tab
+vim.opt.softtabstop = 4 -- The number of spaces inserted when hitting <Tab>
+vim.opt.shiftwidth = 4 -- Size of an indent
+vim.opt.expandtab = true -- Convert tabs to spaces
