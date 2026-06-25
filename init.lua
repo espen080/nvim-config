@@ -965,6 +965,8 @@ require('lazy').setup({
         'vim',
         'vimdoc',
         'json',
+        'rust',
+        'python',
       }
 
       for _, parser in ipairs(parsers) do
