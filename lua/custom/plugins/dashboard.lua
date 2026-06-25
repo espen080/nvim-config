@@ -10,7 +10,7 @@ return {
           -- { section = 'header' },
           {
             section = 'terminal',
-            cmd = 'chafa ~/.config/logo.png --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1',
+            cmd = 'chafa ~/.config/logo-text.png --format symbols --symbols vhalf --size 60x17; sleep .1',
             height = 17,
             padding = 1,
           },
