@@ -967,6 +967,7 @@ require('lazy').setup({
         'json',
         'rust',
         'python',
+        'yaml',
       }
 
       for _, parser in ipairs(parsers) do
