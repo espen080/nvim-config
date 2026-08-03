@@ -968,6 +968,7 @@ require('lazy').setup({
         'rust',
         'python',
         'yaml',
+        'javascript',
       }
 
       for _, parser in ipairs(parsers) do
