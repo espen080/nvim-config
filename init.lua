@@ -947,37 +947,44 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
 
     config = function()
       local ts = require 'nvim-treesitter'
 
-      local parsers = {
-        'bash',
-        'c',
-        'diff',
-        'html',
-        'lua',
-        'luadoc',
-        'markdown',
-        'markdown_inline',
-        'query',
-        'vim',
-        'vimdoc',
-        'json',
-        'rust',
-        'python',
-        'yaml',
-        'javascript',
-      }
-
-      for _, parser in ipairs(parsers) do
-        ts.install(parser)
-      end
-
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
+          local buffer = vim.bo[args.buf]
+
+          -- Handle non filelike buffers
+          local ignored_buftypes = {
+            nofile = true,
+            prompt = true,
+            help = true,
+            quickfix = true,
+            terminal = true,
+          }
+          if ignored_buftypes[buffer.buftype] then
+            return
+          end
+
+          -- Install parser
+          local ok, task = pcall(ts.install, { buffer.filetype })
+
+          -- Await the install before starting to parse
+          if ok and task then
+            task:await(function()
+              vim.schedule(function()
+                if vim.api.nvim_buf_is_valid(args.buf) then
+                  pcall(vim.treesitter.start, args.buf)
+                end
+              end)
+            end)
+          else
+            -- If the parser is already installed (noop) or invalid, start parsing right away
+            pcall(vim.treesitter.start, args.buf)
+          end
         end,
       })
     end,
