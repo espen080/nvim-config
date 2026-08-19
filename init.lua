@@ -969,8 +969,10 @@ require('lazy').setup({
             return
           end
 
+          local lang = vim.treesitter.language.get_lang(buffer.filetype) or buffer.filetype
+
           -- Install parser
-          local ok, task = pcall(ts.install, { buffer.filetype })
+          local ok, task = pcall(ts.install, { lang })
 
           -- Await the install before starting to parse
           if ok and task then
